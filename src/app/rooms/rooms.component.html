@@ -4,5 +4,32 @@
   <div [innerText]="numberOfRooms"></div>
 </div>
 
+{{ rooms?.availableRooms ?? "No Rooms" }}
+
+<div *ngIf="rooms.availableRooms > 0">
+  Rooms List
+  <!-- {{ roomList }} -->
+  <table>
+    <tr>
+      <th>Index</th>
+      <th>Even/Odd</th>
+      <th>Room Number</th>
+      <th>Room Type</th>
+      <th>Room Price</th>
+      <th>Room Amenities</th>
+      <th>Checkin Time</th>
+    </tr>
+    <tr *ngFor="let room of roomList; let e = even; let o = odd; let i = index">
+      <td>{{ i }}</td>
+      <td>{{ e ? "Even" : "Odd" }}</td>
+      <td>{{ room.roomNumbers }}</td>
+      <td>{{ room.roomType }}</td>
+      <td>{{ room.price }}</td>
+      <td>{{ room.amenities }}</td>
+      <td>{{ room.checkinTime }}</td>
+    </tr>
+  </table>
+</div>
+
 <!-- Even Binding -->
 <button (click)="toggle()">Hide Rooms</button>
