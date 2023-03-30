@@ -21,6 +21,7 @@
       <th>Room Price</th>
       <th>Room Amenities</th>
       <th>Checkin Time</th>
+      <th>Rating</th>
     </tr>
     <tr
       [ngClass]="e ? 'even' : 'odd'"
@@ -29,10 +30,11 @@
       <td>{{ i }}</td>
       <td>{{ e ? "Even" : "Odd" }}</td>
       <td>{{ room.roomNumbers }}</td>
-      <td>{{ room.roomType }}</td>
-      <td>{{ room.price }}</td>
-      <td>{{ room.amenities }}</td>
-      <td>{{ room.checkinTime }}</td>
+      <td>{{ room.roomType | uppercase }}</td>
+      <td>{{ room.price | currency : "RP" }}</td>
+      <td>{{ room.amenities | titlecase }}</td>
+      <td>{{ room.checkinTime | date : "short" }}</td>
+      <td>{{ room.rating | number : '1-1-1' }}</td>
     </tr>
   </table>
 </div>
