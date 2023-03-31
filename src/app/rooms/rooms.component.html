@@ -9,34 +9,15 @@
 
 {{ rooms?.availableRooms ?? "No Rooms" }}
 
+<div *ngIf="selectedRoom">
+  {{ selectedRoom | json }}
+</div>
+
 <div *ngIf="rooms.availableRooms > 0">
-  Rooms List
-  <!-- {{ roomList }} -->
-  <table>
-    <tr>
-      <th>Index</th>
-      <th>Even/Odd</th>
-      <th>Room Number</th>
-      <th>Room Type</th>
-      <th>Room Price</th>
-      <th>Room Amenities</th>
-      <th>Checkin Time</th>
-      <th>Rating</th>
-    </tr>
-    <tr
-      [ngClass]="e ? 'even' : 'odd'"
-      *ngFor="let room of roomList; let e = even; let o = odd; let i = index"
-    >
-      <td>{{ i }}</td>
-      <td>{{ e ? "Even" : "Odd" }}</td>
-      <td>{{ room.roomNumbers }}</td>
-      <td>{{ room.roomType | uppercase }}</td>
-      <td>{{ room.price | currency : "RP" }}</td>
-      <td>{{ room.amenities | titlecase }}</td>
-      <td>{{ room.checkinTime | date : "short" }}</td>
-      <td>{{ room.rating | number : '1-1-1' }}</td>
-    </tr>
-  </table>
+  <app-rooms-list
+    [rooms]="roomList"
+    (selectedRoom)="selectRoom($event)"
+  ></app-rooms-list>
 </div>
 
 <!-- Even Binding -->
