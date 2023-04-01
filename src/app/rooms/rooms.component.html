@@ -7,7 +7,7 @@
   ></div>
 </div>
 
-{{ rooms?.availableRooms ?? "No Rooms" }}
+{{ rooms.availableRooms || "No Rooms" }}
 
 <div *ngIf="selectedRoom">
   {{ selectedRoom | json }}
@@ -20,6 +20,7 @@
 <div *ngIf="rooms.availableRooms > 0">
   <app-rooms-list
     [rooms]="roomList"
+    [title]="title"
     (selectedRoom)="selectRoom($event)"
   ></app-rooms-list>
 </div>
