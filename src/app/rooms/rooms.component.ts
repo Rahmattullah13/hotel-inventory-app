@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
 import { Room, RoomList } from './rooms';
 
 @Component({
@@ -6,7 +6,7 @@ import { Room, RoomList } from './rooms';
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.css'],
 })
-export class RoomsComponent {
+export class RoomsComponent implements DoCheck {
   hotelName = 'Accor Hotel';
 
   hideRooms = false;
@@ -59,9 +59,13 @@ export class RoomsComponent {
     },
   ];
 
+  ngDoCheck(): void {
+    console.log('on changes is called');
+  }
+
   toggle() {
     this.hideRooms = !this.hideRooms;
-    this.title= "Rooms list"
+    this.title = 'Rooms list';
   }
 
   selectRoom(room: RoomList) {
