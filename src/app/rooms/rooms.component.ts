@@ -42,7 +42,7 @@ export class RoomsComponent
 
   // To Creat Multiple Component
   @ViewChildren(HeaderComponent)
-  headerChildrenComponent!: QueryList<HeaderComponent>;
+  headerChildrenComponent!: QueryList<HeaderComponent>; 
 
   ngOnInit(): void {
     // console.log(this.headerComponent);
