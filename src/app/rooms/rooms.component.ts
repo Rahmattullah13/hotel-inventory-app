@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { Room, RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
+import { RoomsService } from './services/rooms.service';
 
 @Component({
   selector: 'app-rooms',
@@ -42,46 +43,14 @@ export class RoomsComponent
 
   // To Creat Multiple Component
   @ViewChildren(HeaderComponent)
-  headerChildrenComponent!: QueryList<HeaderComponent>; 
+  headerChildrenComponent!: QueryList<HeaderComponent>;
+
+  // roomService = new RoomsService(); //this is a service
+
+  constructor(private roomsService: RoomsService) {}
 
   ngOnInit(): void {
-    // console.log(this.headerComponent);
-
-    this.roomList = [
-      {
-        roomNumbers: 1,
-        roomType: 'Deluxe Room',
-        amenities: 'Air Conditioner, Free Wi-Fi, TV, Bathroom, Kitchen',
-        price: 1000000,
-        photos:
-          'https://images.unplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-        checkinTime: new Date('11-Nov-2021'),
-        checkoutTime: new Date('12-Nov-2021'),
-        rating: 4.5,
-      },
-      {
-        roomNumbers: 2,
-        roomType: 'Deluxe Room',
-        amenities: 'Air Conditioner, Free Wi-Fi, TV, Bathroom, Kitchen',
-        price: 1000000,
-        photos:
-          'https://images.unplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-        checkinTime: new Date('11-Nov-2021'),
-        checkoutTime: new Date('12-Nov-2021'),
-        rating: 4.3,
-      },
-      {
-        roomNumbers: 3,
-        roomType: 'Private Suite Room',
-        amenities: 'Air Conditioner, Free Wi-Fi, TV, Bathroom, Kitchen',
-        price: 3000000,
-        photos:
-          'https://images.unplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-        checkinTime: new Date('11-Nov-2021'),
-        checkoutTime: new Date('12-Nov-2021'),
-        rating: 4.9,
-      },
-    ];
+    this.roomList = this.roomsService.getRooms();
   }
 
   ngDoCheck(): void {
@@ -90,7 +59,7 @@ export class RoomsComponent
 
   ngAfterViewInit(): void {
     this.headerComponent.title = 'Rooms View';
-    this.headerChildrenComponent.last.title = "Last Title";
+    this.headerChildrenComponent.last.title = 'Last Title';
   }
 
   ngAfterViewChecked(): void {}
