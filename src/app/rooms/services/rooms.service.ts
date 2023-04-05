@@ -42,8 +42,7 @@ export class RoomsService {
   ];
 
   constructor() {
-    console.log("Room Service is called!");
-    
+    console.log('Room Service is called!');
   }
 
   getRooms() {

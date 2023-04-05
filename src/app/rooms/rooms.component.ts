@@ -7,6 +7,7 @@ import {
   AfterViewChecked,
   ViewChildren,
   QueryList,
+  SkipSelf
 } from '@angular/core';
 import { Room, RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
@@ -47,7 +48,7 @@ export class RoomsComponent
 
   // roomService = new RoomsService(); //this is a service
 
-  constructor(private roomsService: RoomsService) {}
+  constructor(@SkipSelf() private roomsService: RoomsService) {}
 
   ngOnInit(): void {
     this.roomList = this.roomsService.getRooms();
@@ -90,3 +91,7 @@ export class RoomsComponent
     this.roomList = [...this.roomList, room];
   }
 }
+function SkipShelf(target: typeof RoomsComponent, propertyKey: undefined, parameterIndex: 0): void {
+  throw new Error('Function not implemented.');
+}
+
