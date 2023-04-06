@@ -95,7 +95,8 @@ export class RoomsComponent
       roomType: 'Deluxe Room',
       amenities: 'Air Conditioner, Free Wi-Fi, TV, Bathroom, Kitchen',
       price: 2000000,
-      photos: 'https://images.unplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+      photos:
+        'https://images.unplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
       checkinTime: new Date('11-Nov-2021'),
       checkoutTime: new Date('12-Nov-2021'),
       rating: 4.7,
@@ -122,6 +123,12 @@ export class RoomsComponent
     };
 
     this.roomsService.editRoom(room).subscribe((data) => {
+      this.roomList = data;
+    });
+  }
+
+  deleteRoom() {
+    this.roomsService.deleteRoom('3').subscribe((data) => {
       this.roomList = data;
     });
   }
