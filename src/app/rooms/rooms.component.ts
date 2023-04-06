@@ -7,11 +7,12 @@ import {
   AfterViewChecked,
   ViewChildren,
   QueryList,
-  SkipSelf
+  SkipSelf,
 } from '@angular/core';
 import { Room, RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-rooms',
@@ -46,12 +47,26 @@ export class RoomsComponent
   @ViewChildren(HeaderComponent)
   headerChildrenComponent!: QueryList<HeaderComponent>;
 
-  // roomService = new RoomsService(); //this is a service
+  stream = new Observable<string>((observer) => {
+    observer.next('user1');
+    observer.next('user2');
+    observer.next('user3');
+    observer.complete();
+    // observer.error("error")
+  });
 
   constructor(@SkipSelf() private roomsService: RoomsService) {}
 
   ngOnInit(): void {
-    this.roomList = this.roomsService.getRooms();
+    this.stream.subscribe({
+      next: (value) => console.log(value),
+      complete: () => console.log('Complete'),
+      error: (err) => console.log(err),
+    });
+    this.stream.subscribe((data) => console.log(data));
+    this.roomsService.getRooms().subscribe((rooms) => {
+      this.roomList = rooms;
+    });
   }
 
   ngDoCheck(): void {
@@ -76,7 +91,7 @@ export class RoomsComponent
 
   addRoom() {
     const room: RoomList = {
-      roomNumbers: 4,
+      roomNumbers: '4',
       roomType: 'Deluxe Room',
       amenities: 'Air Conditioner, Free Wi-Fi, TV, Bathroom, Kitchen',
       price: 2000000,
@@ -91,7 +106,3 @@ export class RoomsComponent
     this.roomList = [...this.roomList, room];
   }
 }
-function SkipShelf(target: typeof RoomsComponent, propertyKey: undefined, parameterIndex: 0): void {
-  throw new Error('Function not implemented.');
-}
-
