@@ -1,7 +1,5 @@
 <!-- <h1>Welcome to {{ hotelName }}</h1> -->
 <app-header></app-header>
-<app-header></app-header>
-<app-header></app-header>
 <div [hidden]="hideRooms">
   Number of Rooms:
   <div
@@ -20,9 +18,9 @@
   <button (click)="addRoom()">Add Room</button>
 </div>
 
-<div *ngIf="hideRooms">
+<div *ngIf="rooms$ | async as rooms">
   <app-rooms-list
-    [rooms]="roomList"
+    [rooms]="rooms"
     [title]="title"
     (selectedRoom)="selectRoom($event)"
   ></app-rooms-list>
@@ -35,6 +33,4 @@
 
 <button (click)="deleteRoom()">Delete Rooms</button>
 
-<h1>
-  {{totalBytes}} loaded!
-</h1>
+<h1>{{ totalBytes }} loaded!</h1>
