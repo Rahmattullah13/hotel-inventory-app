@@ -13,7 +13,7 @@ import {
 import { Room, RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
-import { Observable, Subject, Subscription, catchError, of } from 'rxjs';
+import { Observable, Subject, Subscription, catchError, map, of } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 
 @Component({
@@ -72,6 +72,8 @@ export class RoomsComponent
       return of([]);
     })
   );
+
+  roomsCount$ = this.roomsService.getRooms$.pipe(map((rooms) => rooms.length));
 
   constructor(@SkipSelf() private roomsService: RoomsService) {}
 
