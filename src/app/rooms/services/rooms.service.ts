@@ -22,7 +22,7 @@ export class RoomsService {
   }
 
   getRooms() {
-    return this.http.get<RoomList[]>('/api/rooms');
+    return this.http.get<RoomList[]>('/apirooms');
   }
 
   addRoom(room: RoomList) {
