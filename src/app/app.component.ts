@@ -2,6 +2,7 @@ import { Component, Optional, OnInit, Inject } from '@angular/core';
 import { RoomsComponent } from './rooms/rooms.component';
 import { LoggerService } from './logger.service';
 import { localStorageToken } from './localstorage.token';
+import { InitService } from './init.service';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +14,11 @@ export class AppComponent implements OnInit {
 
   constructor(
     @Optional() private loggerService: LoggerService,
-    @Inject(localStorageToken) private localStorage: any
-  ) {}
+    @Inject(localStorageToken) private localStorage: any,
+    private initService: InitService
+  ) {
+    console.log(initService.config);
+  }
 
   ngOnInit() {
     this.loggerService?.log('AppComponent.ngOnInit()');
