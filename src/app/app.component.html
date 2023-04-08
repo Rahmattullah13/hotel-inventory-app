@@ -1,11 +1,11 @@
-<h2>Hello World</h2>
+<!-- <h2>Hello World</h2>
 <app-rooms></app-rooms>
 
 <app-container>
   <app-rooms> </app-rooms>
   <app-employee></app-employee>
   <h1>This is from ng-content</h1>
-</app-container>
+</app-container> -->
 
 <!-- <div [ngSwitch]="role">
   <div *ngSwitchCase="'User'">Welcome User!</div>
@@ -20,3 +20,6 @@
   <ng-template #user>
   </ng-template>
 </div> -->
+<a [routerLink]="'rooms'">Rooms</a>
+<a [routerLink]="'employee'">Employee</a>
+<router-outlet></router-outlet>

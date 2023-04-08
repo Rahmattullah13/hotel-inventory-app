@@ -1,5 +1,4 @@
 import { Component, Optional, OnInit, Inject } from '@angular/core';
-import { RoomsComponent } from './rooms/rooms.component';
 import { LoggerService } from './logger.service';
 import { localStorageToken } from './localstorage.token';
 import { InitService } from './init.service';
