@@ -23,12 +23,19 @@ export class BookingComponent implements OnInit {
       bookingDate: [''],
       mobileNumber: [''],
       guestName: [''],
-      guestAddress: [''],
-      guestCity: [''],
-      guestState: [''],
-      guestCountry: [''],
-      guestZipCode: [''],
+      address: this.fb.group({
+        addressLine1: [''],
+        addressLine2: [''],
+        city: [''],
+        state: [''],
+        country: [''],
+        zipCode: [''],
+      }),
       guestCount: [''],
     });
+  }
+
+  addBooking() {
+    console.log(this.bookingForm.value);
   }
 }

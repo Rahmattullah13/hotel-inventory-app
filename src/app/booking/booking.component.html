@@ -3,23 +3,7 @@
 {{ bookingForm.pristine | json }}
 {{ bookingForm.dirty | json }}
 
-<!-- roomId: [''],
-      guestEmail: [''],
-      checkinDate: [''],
-      checkoutDate: [''],
-      bookingStatus: [''],
-      bookingAmount: [''],
-      bookingDate: [''],
-      mobileNumber: [''],
-      guestName: [''],
-      guestAddress: [''],
-      guestCity: [''],
-      guestState: [''],
-      guestCountry: [''],
-      guestZipCode: [''],
-      guestCount: [''], -->
-
-<form [formGroup]="bookingForm">
+<form [formGroup]="bookingForm" (ngSubmit)="addBooking()">
   <mat-form-field class="example-full-width">
     <mat-label>Room Id</mat-label>
     <input
@@ -94,4 +78,74 @@
     <mat-datepicker-toggle matSuffix [for]="booking"></mat-datepicker-toggle>
     <mat-datepicker #booking></mat-datepicker>
   </mat-form-field>
+
+  <div formGroupName="address">
+    <mat-accordion class="example-headers-align" multi>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Address </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-form-field class="example-full-width">
+          <input
+            type="text"
+            matInput
+            formControlName="addressLine1"
+            placeholder="Address Line1"
+          />
+          <mat-error
+            *ngIf="
+              bookingForm.get('address.addressLine1')?.hasError('required')
+            "
+          >
+            Address Line1 is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input
+            type="text"
+            matInput
+            formControlName="addressLine2"
+            placeholder="Address Line2"
+          />
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input
+            type="text"
+            matInput
+            formControlName="city"
+            placeholder="City"
+          />
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input
+            type="text"
+            matInput
+            formControlName="state"
+            placeholder="State"
+          />
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input
+            type="text"
+            matInput
+            formControlName="country"
+            placeholder="Country"
+          />
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input
+            type="text"
+            matInput
+            formControlName="zipCode"
+            placeholder="Pin Codes"
+          />
+        </mat-form-field>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div>
+    <button mat-raised-button color="primary">Book Room</button>
+  </div>
 </form>
