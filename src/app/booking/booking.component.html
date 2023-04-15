@@ -1,9 +1,37 @@
-<p>booking works!</p>
-{{ bookingForm.value | json }}
-{{ bookingForm.pristine | json }}
-{{ bookingForm.dirty | json }}
-
+{{ bookingForm.invalid | json }}
+{{ bookingForm.valid | json }}
+<div>
+  <button
+  class="button"
+    mat-raised-button
+    color="primary"
+    type="button"
+    (click)="addPassport()"
+  >
+    Add Passport
+  </button>
+</div>
+<div>
+  <button
+  class="button"
+    mat-raised-button
+    color="primary"
+    type="button"
+    (click)="deletePassport()"
+  >
+    delete Passport
+  </button>
+</div>
 <form [formGroup]="bookingForm" (ngSubmit)="addBooking()">
+  <mat-form-field class="example-full-width" *ngIf="bookingForm.get('passport')">
+    <mat-label>Passport</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="passport"
+      placeholder="Passport Number"
+    />
+  </mat-form-field>
   <mat-form-field class="example-full-width">
     <mat-label>Room Id</mat-label>
     <input
@@ -12,38 +40,28 @@
       formControlName="roomId"
       placeholder="Room Id"
     />
-    <!-- <mat-error
-      *ngIf="
-        emailFormControl.hasError('email') &&
-        !emailFormControl.hasError('required')
-      "
-    >
-      Please enter a valid email address
-    </mat-error>
-    <mat-error *ngIf="emailFormControl.hasError('required')">
-      Email is <strong>required</strong>
-    </mat-error> -->
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <mat-label>Guest Email</mat-label>
-    <input
-      type="email"
-      matInput
-      formControlName="guestEmail"
-      placeholder="Guest Email"
-    />
-  </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <mat-label>Guest Name</mat-label>
     <input
       type="text"
       matInput
       formControlName="guestName"
       placeholder="Guest Name"
     />
+    {{ bookingForm.get("guestName")?.errors | json }}
+    <mat-error *ngIf="bookingForm.get('guestName')?.hasError('minlength')">
+      Guest Name should be minimun 5 characters!
+    </mat-error>
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <mat-label>Mobile Number</mat-label>
+    <input
+      type="email"
+      matInput
+      formControlName="guestEmail"
+      placeholder="Provide an Email"
+    />
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
     <input
       type="text"
       matInput
@@ -52,7 +70,6 @@
     />
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <mat-label>Booking Amount</mat-label>
     <input
       type="number"
       matInput
@@ -71,6 +88,7 @@
     <input matInput [matDatepicker]="checkout" formControlName="checkoutDate" />
     <mat-datepicker-toggle matSuffix [for]="checkout"></mat-datepicker-toggle>
     <mat-datepicker #checkout></mat-datepicker>
+    {{ bookingForm.get("checkoutDate")?.errors | json }}
   </mat-form-field>
   <mat-form-field class="example-full-width">
     <mat-label>Booking date</mat-label>
@@ -78,7 +96,6 @@
     <mat-datepicker-toggle matSuffix [for]="booking"></mat-datepicker-toggle>
     <mat-datepicker #booking></mat-datepicker>
   </mat-form-field>
-
   <div formGroupName="address">
     <mat-accordion class="example-headers-align" multi>
       <mat-expansion-panel>
@@ -147,6 +164,7 @@
   </div>
   <div>
     <button
+    class="button"
       mat-raised-button
       color="primary"
       type="button"
@@ -163,7 +181,7 @@
         </mat-expansion-panel-header>
         <div *ngFor="let guest of guests.controls; let i = index">
           <div [formGroupName]="i">
-            <mat-form-field>
+            <mat-form-field class="example-full-width">
               <input
                 type="text"
                 matInput
@@ -180,7 +198,7 @@
                 Guest name is <strong>required</strong>
               </mat-error>
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field class="example-full-width">
               <input
                 type="number"
                 matInput
@@ -209,7 +227,7 @@
     >
   </div>
   <div>
-    <button [disabled]="bookingForm.invalid" mat-raised-button color="primary">
+    <button class="button" [disabled]="bookingForm.invalid" mat-raised-button color="primary">
       Book Room
     </button>
   </div>
