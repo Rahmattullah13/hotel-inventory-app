@@ -8,6 +8,9 @@ import { shareReplay } from 'rxjs';
   providedIn: 'root',
 })
 export class RoomsService {
+  delete(arg0: string) {
+    throw new Error('Method not implemented.');
+  }
   roomList: RoomList[] = [];
   // headers = new HttpHeaders({ token: 'cjoqw1233o2j3ngo4' });
   getRooms$ = this.http

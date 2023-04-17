@@ -22,6 +22,8 @@ export class RoomsListComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() title: string = '';
 
+  @Input() price: any = 0;
+
   @Output() selectedRoom = new EventEmitter<RoomList>();
 
   ngOnChanges(changes: SimpleChanges): void {

@@ -19,7 +19,7 @@
     type="button"
     (click)="deletePassport()"
   >
-    delete Passport
+    Delete Passport
   </button>
 </div>
 <form [formGroup]="bookingForm" (ngSubmit)="addBooking()">
@@ -155,8 +155,8 @@
           <input
             type="text"
             matInput
-            formControlName="zipCode"
-            placeholder="Pin Codes"
+            formControlName="zipCode" 
+            placeholder="Zip Code"
           />
         </mat-form-field>
       </mat-expansion-panel>
