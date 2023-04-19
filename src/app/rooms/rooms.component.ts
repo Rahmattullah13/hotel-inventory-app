@@ -17,6 +17,7 @@ import { Observable, Subject, Subscription, catchError, map, of } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 import { ConfigService } from '../services/config.service';
 import { FormControl } from '@angular/forms';
+import { ShareddataService } from '../services/shareddata.service';
 
 @Component({
   selector: 'app-rooms',
@@ -77,11 +78,14 @@ export class RoomsComponent
     })
   );
 
+  message$ = this.sharedDataService.message$;
+
   roomsCount$ = this.roomsService.getRooms$.pipe(map((rooms) => rooms.length));
 
   constructor(
     @SkipSelf() private roomsService: RoomsService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private sharedDataService: ShareddataService
   ) {}
 
   ngOnInit(): void {

@@ -1,4 +1,4 @@
-import { Calculator } from './testservice';
+import { Calculator } from './test.service';
 
 describe('testservice', () => {
   it('should add 2 number', () => {
